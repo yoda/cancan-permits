@@ -12,11 +12,25 @@ module Permits::Roles
   end
 end
 
+class Guest
+  class << self
+    attr_accessor :id_counter
+
+    def next_id
+      @id_counter += 1      
+    end
+      
+    def create
+      User.new next_id, :guest, 'Guest'
+    end
+  end
+end
+
 class User
   attr_accessor :id, :role, :name
 
   def self.roles
-    [:guest, :admin, :editor]
+    [:guest, :admin, :editor, :super_admin]
   end    
 
   def initialize id, role, name = nil

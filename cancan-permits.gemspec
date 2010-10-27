@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cancan-permits}
-  s.version = "0.2.5"
+  s.version = "0.2.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-10-17}
+  s.date = %q{2010-10-23}
   s.description = %q{Role specific Permits for use with CanCan permission system}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     ".document",
      ".gitignore",
      ".rspec",
+     "Changelog.txt",
      "LICENSE",
      "README.markdown",
      "Rakefile",
@@ -27,10 +28,11 @@ Gem::Specification.new do |s|
      "cancan-permits.gemspec",
      "development.sqlite3",
      "lib/cancan-permits.rb",
+     "lib/cancan-permits/license/base_license.rb",
      "lib/cancan-permits/main.rb",
      "lib/cancan-permits/namespaces.rb",
-     "lib/cancan-permits/permit/base_license.rb",
      "lib/cancan-permits/permit/base_permit.rb",
+     "lib/cancan-permits/permit/util.rb",
      "lib/cancan-permits/permits/ability.rb",
      "lib/cancan-permits/permits/configuration.rb",
      "lib/cancan-permits/permits/roles.rb",
@@ -56,9 +58,18 @@ Gem::Specification.new do |s|
      "spec/data_mapper/permits_spec.rb",
      "spec/data_mapper/spec_helper.rb",
      "spec/fixtures/permits/admin_permit.rb",
+     "spec/fixtures/permits/any_permit.rb",
      "spec/fixtures/permits/editor_permit.rb",
      "spec/fixtures/permits/guest_permit.rb",
+     "spec/fixtures/permits/super_admin_permit.rb",
+     "spec/fixtures/permits/system_permit.rb",
      "spec/generators/permit_generator_spec.rb",
+     "spec/generic/api/basic/config.rb",
+     "spec/generic/api/basic/xgroup.rb",
+     "spec/generic/api/basic/xgroup_orm.rb",
+     "spec/generic/api/owner/config.rb",
+     "spec/generic/api/owner/xgroup.rb",
+     "spec/generic/api/owner/xgroup_orm.rb",
      "spec/generic/models/all_models.rb",
      "spec/generic/owner_permits_spec.rb",
      "spec/generic/permits_spec.rb",
@@ -71,6 +82,11 @@ Gem::Specification.new do |s|
      "spec/mongoid/owner_permits_spec.rb",
      "spec/mongoid/permits_spec.rb",
      "spec/mongoid/spec_helper.rb",
+     "spec/simply_stored/CouchDB.txt",
+     "spec/simply_stored/models/all_models.rb",
+     "spec/simply_stored/owner_permits_spec.rb",
+     "spec/simply_stored/permits_spec.rb",
+     "spec/simply_stored/spec_helper.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/kristianmandrup/cancan-permits}
@@ -92,9 +108,18 @@ Gem::Specification.new do |s|
      "spec/data_mapper/permits_spec.rb",
      "spec/data_mapper/spec_helper.rb",
      "spec/fixtures/permits/admin_permit.rb",
+     "spec/fixtures/permits/any_permit.rb",
      "spec/fixtures/permits/editor_permit.rb",
      "spec/fixtures/permits/guest_permit.rb",
+     "spec/fixtures/permits/super_admin_permit.rb",
+     "spec/fixtures/permits/system_permit.rb",
      "spec/generators/permit_generator_spec.rb",
+     "spec/generic/api/basic/config.rb",
+     "spec/generic/api/basic/xgroup.rb",
+     "spec/generic/api/basic/xgroup_orm.rb",
+     "spec/generic/api/owner/config.rb",
+     "spec/generic/api/owner/xgroup.rb",
+     "spec/generic/api/owner/xgroup_orm.rb",
      "spec/generic/models/all_models.rb",
      "spec/generic/owner_permits_spec.rb",
      "spec/generic/permits_spec.rb",
@@ -107,6 +132,10 @@ Gem::Specification.new do |s|
      "spec/mongoid/owner_permits_spec.rb",
      "spec/mongoid/permits_spec.rb",
      "spec/mongoid/spec_helper.rb",
+     "spec/simply_stored/models/all_models.rb",
+     "spec/simply_stored/owner_permits_spec.rb",
+     "spec/simply_stored/permits_spec.rb",
+     "spec/simply_stored/spec_helper.rb",
      "spec/spec_helper.rb"
   ]
 
@@ -117,25 +146,25 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, ["~> 2.0.0"])
       s.add_development_dependency(%q<code-spec>, ["~> 0.2.5"])
-      s.add_development_dependency(%q<rails-app-spec>, ["~> 0.2.14"])
+      s.add_development_dependency(%q<rails-app-spec>, ["~> 0.3.0"])
       s.add_runtime_dependency(%q<cancan>, ["~> 1.4.0"])
       s.add_runtime_dependency(%q<require_all>, ["~> 1.2.0"])
-      s.add_runtime_dependency(%q<sugar-high>, ["~> 0.2.10"])
+      s.add_runtime_dependency(%q<sugar-high>, ["~> 0.3.0"])
     else
       s.add_dependency(%q<rspec>, ["~> 2.0.0"])
       s.add_dependency(%q<code-spec>, ["~> 0.2.5"])
-      s.add_dependency(%q<rails-app-spec>, ["~> 0.2.14"])
+      s.add_dependency(%q<rails-app-spec>, ["~> 0.3.0"])
       s.add_dependency(%q<cancan>, ["~> 1.4.0"])
       s.add_dependency(%q<require_all>, ["~> 1.2.0"])
-      s.add_dependency(%q<sugar-high>, ["~> 0.2.10"])
+      s.add_dependency(%q<sugar-high>, ["~> 0.3.0"])
     end
   else
     s.add_dependency(%q<rspec>, ["~> 2.0.0"])
     s.add_dependency(%q<code-spec>, ["~> 0.2.5"])
-    s.add_dependency(%q<rails-app-spec>, ["~> 0.2.14"])
+    s.add_dependency(%q<rails-app-spec>, ["~> 0.3.0"])
     s.add_dependency(%q<cancan>, ["~> 1.4.0"])
     s.add_dependency(%q<require_all>, ["~> 1.2.0"])
-    s.add_dependency(%q<sugar-high>, ["~> 0.2.10"])
+    s.add_dependency(%q<sugar-high>, ["~> 0.3.0"])
   end
 end
 

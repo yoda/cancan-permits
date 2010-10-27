@@ -1,3 +1,5 @@
+require 'cancan-permits/permit/util'
+
 module Permit
   class Base 
     attr_reader :ability
@@ -55,16 +57,16 @@ module Permit
       end
     end 
 
-    protected
+    protected  
+    
+    include Permit::Util
 
     def localhost_manager?
       Permits::Configuration.localhost_manager
     end
 
     def role_match? user
-      # Rails.logger.debug "Testing: #{self.class.to_s.gsub(/Permit$/, '').underscore.downcase.to_sym}"
-      # Rails.logger.debug "Testing returned: #{self.class.to_s.gsub(/Permit$/, '').underscore.downcase.to_sym}"
-      user.has_role? self.class.to_s.gsub(/Permit$/, '').underscore.downcase.to_sym
+      user.has_role? permit_name(self.class)
     end
       
     def can_definitions
