@@ -149,14 +149,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rails-app-spec>, ["~> 0.3.0"])
       s.add_runtime_dependency(%q<cancan>, ["~> 1.4.0"])
       s.add_runtime_dependency(%q<require_all>, ["~> 1.2.0"])
-      s.add_runtime_dependency(%q<sugar-high>, ["~> 0.3.0"])
+      s.add_runtime_dependency(%q<sugar-high>, ["~> 0.2.10"])
     else
       s.add_dependency(%q<rspec>, ["~> 2.0.0"])
       s.add_dependency(%q<code-spec>, ["~> 0.2.5"])
       s.add_dependency(%q<rails-app-spec>, ["~> 0.3.0"])
       s.add_dependency(%q<cancan>, ["~> 1.4.0"])
       s.add_dependency(%q<require_all>, ["~> 1.2.0"])
-      s.add_dependency(%q<sugar-high>, ["~> 0.3.0"])
+      s.add_dependency(%q<sugar-high>, ["~> 0.2.10"])
     end
   else
     s.add_dependency(%q<rspec>, ["~> 2.0.0"])
@@ -164,7 +164,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rails-app-spec>, ["~> 0.3.0"])
     s.add_dependency(%q<cancan>, ["~> 1.4.0"])
     s.add_dependency(%q<require_all>, ["~> 1.2.0"])
-    s.add_dependency(%q<sugar-high>, ["~> 0.3.0"])
+    s.add_dependency(%q<sugar-high>, ["~> 0.2.10"])
   end
 end
 
