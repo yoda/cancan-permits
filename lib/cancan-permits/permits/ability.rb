@@ -57,6 +57,7 @@ module Permits
     def self.make_permit role, ability, options = {}
       begin            
         clazz_name = "#{role.to_s.camelize}Permit"
+        puts "Looking for #{clazz_name}..."
         permit_clazz = clazz_name.constantize
         permit_clazz.new(ability, options) if permit_clazz && permit_clazz.kind_of?(Class)
       rescue
