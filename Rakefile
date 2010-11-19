@@ -13,7 +13,7 @@ begin
 
     gem.add_dependency 'cancan',          "~> 1.4.0"
     gem.add_dependency 'require_all',     "~> 1.2.0"
-    gem.add_dependency 'sugar-high',      "~> 0.2.10"
+    gem.add_dependency 'sugar-high',      "~> 0.3.0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
